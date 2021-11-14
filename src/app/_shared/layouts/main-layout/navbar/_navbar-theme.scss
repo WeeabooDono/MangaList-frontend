@@ -1,0 +1,13 @@
+@use '~@angular/material' as mat;
+
+@mixin navbar-theme($theme) {
+  $accent-map: map-get($theme, accent);
+
+  .navbar {
+    .navbar-link {
+      &.active::after {
+        background-color: mat.get-color-from-palette($accent-map, 300);
+      }
+    }
+  }
+}

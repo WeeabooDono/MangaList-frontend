@@ -1,0 +1,22 @@
+<div class="app-page-error-container">
+
+  <div class="app-page-error-wrapper">
+    <div class="app-page-error-image">
+      <mat-icon class="app-image-theming-icon" [svgIcon]="svgIcon"></mat-icon>
+    </div>
+  </div>
+
+  <div class="app-page-error-text">
+    <div class="app-page-error-title">
+      <ng-content select="app-page-error-title"></ng-content>
+    </div>
+
+    <div class="app-page-error-info">
+      <ng-content select="app-page-error-info"></ng-content>
+    </div>
+  </div>
+
+  <div class="app-page-error-action">
+    <ng-content select="app-page-error-action"></ng-content>
+  </div>
+</div>

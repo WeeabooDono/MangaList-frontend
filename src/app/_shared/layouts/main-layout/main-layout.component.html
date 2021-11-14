@@ -1,0 +1,61 @@
+<ng-container>
+  <page-layout
+    [ngClass]="{ 'main-dark-theme': isDarkTheme }"
+    [mode]="mode"
+    [sidenavVisibility]="sidenavVisibility"
+    [isOpened]="isOpened"
+    #pageLayout>
+
+    <!-- Header-->
+    <page-layout-header>
+      <toolbar>
+        <toolbar-left *ngIf="(isMobile && sidenavVisibility === 'responsive') || sidenavVisibility === 'visible'">
+          <button mat-icon-button (click)="pageLayout.toggle($event)">
+            <mat-icon>menu</mat-icon>
+          </button>
+        </toolbar-left>
+
+        <toolbar-logo>
+          <a [routerLink]="['/']">
+            <mat-icon svgIcon="logo"></mat-icon>
+          </a>
+        </toolbar-logo>
+
+        <toolbar-nav *ngIf="!isMobile">
+          <navbar [navbarItems]="navbarItems"></navbar>
+        </toolbar-nav>
+
+        <toolbar-right>
+          <button mat-button [matMenuTriggerFor]="langMenu">
+            <language-item [language]="(domain$ | async)!"></language-item>
+          </button>
+          <mat-menu #langMenu="matMenu">
+            <button mat-menu-item *ngFor="let language of languageDomain" (click)="switchDomain(language)">
+              <language-item [language]="language"></language-item>
+            </button>
+          </mat-menu>
+          <button mat-icon-button (click)="storeThemeSelection()">
+            <mat-icon>{{ isDarkTheme ? 'dark_mode' : 'light_mode' }}</mat-icon>
+          </button>
+        </toolbar-right>
+      </toolbar>
+    </page-layout-header>
+
+    <page-layout-subheader>
+      <ng-content select="main-layout-subheader"></ng-content>
+    </page-layout-subheader>
+
+    <page-layout-sidenav>
+      <simple-sidemenu [sideMenuItems]="navbarItems"></simple-sidemenu>
+    </page-layout-sidenav>
+
+    <page-layout-content>
+      <ng-content></ng-content>
+    </page-layout-content>
+
+    <page-layout-footer>
+      <app-footer></app-footer>
+    </page-layout-footer>
+
+  </page-layout>
+</ng-container>

@@ -1,0 +1,43 @@
+.sidemenu {
+  word-wrap: break-word;
+  height: 100%;
+
+  .sidemenu-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+
+    .sidemenu-scrollable-zone {
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    .sidemenu-header {
+      z-index: 1;
+      position: relative;
+    }
+
+    .sidemnu-fab {
+      position: absolute;
+      right: 48px;
+      top: calc(100% - 28px);
+      z-index: 2;
+    }
+
+    .sidemenu-header-container,
+    .sidemenu-footer-container {
+      display: flex;
+      flex-direction: column;
+      flex: 0 0 auto;
+    }
+
+    .sidemenu-content-container {
+      display: flex;
+      flex-direction: column;
+      flex: 1 0 auto;
+    }
+  }
+}

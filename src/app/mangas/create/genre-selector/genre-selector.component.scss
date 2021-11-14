@@ -1,0 +1,13 @@
+.genre-selector {
+  .container {
+    display: flex;
+
+    > * {
+      flex: 1 1 50%;
+    }
+
+    mat-chip-list {
+      padding: 16px;
+    }
+  }
+}

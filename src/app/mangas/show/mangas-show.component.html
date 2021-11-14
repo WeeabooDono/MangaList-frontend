@@ -1,0 +1,11 @@
+<p>{{ 'mangas.show.title' | translate }}</p>
+{{ (manga$ | async)?.title }}
+
+<ul>
+  <li *ngFor="let genre of genres$ | async">{{ genre.name }}</li>
+</ul>
+<div>
+  <button mat-flat-button (click)="navigateToEdit()">
+    {{ 'mangas.edit.path' | translate:{title: (manga$ | async)?.title} }}
+  </button>
+</div>

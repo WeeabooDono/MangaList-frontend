@@ -1,0 +1,15 @@
+.main-layout {
+  .page-layout-body {
+    width: 80%;
+  }
+
+  .page-layout-footer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    app-footer {
+      width: 100%;
+    }
+  }
+}

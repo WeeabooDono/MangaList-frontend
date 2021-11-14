@@ -1,0 +1,13 @@
+@use '~@angular/material' as mat;
+
+@mixin genre-chip-theme($theme) {
+  $primary-map: map-get($theme, primary);
+
+  .genre-chip {
+    .chip {
+      border-color: mat.get-color-from-palette($primary-map, 300);
+      background-color: mat.get-color-from-palette($primary-map, 200);
+      color: mat.get-contrast-color-from-palette($primary-map, 200);
+    }
+  }
+}

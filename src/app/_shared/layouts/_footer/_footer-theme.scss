@@ -1,0 +1,24 @@
+@use '~@angular/material' as mat;
+
+@import 'src/styles/variables';
+
+@mixin footer-theme($theme) {
+  $primary-map: map-get($theme, primary);
+
+  .footer {
+    .footer-container {
+      background-color: mat.get-color-from-palette($primary-map, 800);
+      color: mat.get-contrast-color-from-palette($primary-map, 800);
+
+      .footer-content {
+        padding: 16px $default-horizontal-padding 16px;
+      }
+
+      .footer-copyright {
+        padding: 8px $default-horizontal-padding 8px;
+        background-color: mat.get-color-from-palette($primary-map, 900);
+        color: mat.get-contrast-color-from-palette($primary-map, 900);
+      }
+    }
+  }
+}

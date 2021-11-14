@@ -1,0 +1,24 @@
+.app-page-error {
+  height: 100%;
+
+  .app-page-error-container {
+    display: flex;
+    height: 100%;
+
+    .mat-icon {
+      flex: 1;
+      height: 400px;
+      width: 400px;
+    }
+
+    .app-page-error-text {
+      .app-page-error-title {
+        text-align: center;
+      }
+
+      .app-page-error-info {
+        text-align: center;
+      }
+    }
+  }
+}

@@ -1,0 +1,157 @@
+{
+  "home": {
+    "title": "Accueil",
+    "form": {
+      "search": {
+        "label": "Chercher un Manga"
+      }
+    }
+  },
+  "mangas": {
+    "title": "Mangas",
+    "create": {
+      "path": "Créer un manga",
+      "title": "Créer un manga",
+      "form": {
+        "validate": "Créer un manga",
+        "snackbar": {
+          "create": "Le manga \"{{ title }}\" a bien été créé."
+        },
+        "title": {
+          "value": "Titre du manga",
+          "errors": {
+            "required": "Le titre doit être renseigné.",
+            "min-length": "Le titre doit faire plus de {{ minLength }} caractères.",
+            "max-length": "Le titre doit faire moins de {{ maxLength }} caractères.",
+            "invalid-manga-title": "Le nom du manga existe déjà."
+          }
+        },
+        "description": {
+          "value": "Description du manga",
+          "errors": {
+            "required": "La description doit être renseignée.",
+            "min-length": "La description doit faire plus de {{ minLength }} caractères.",
+            "max-length": "La description doit faire moins de {{ maxLength }} caractères."
+          }
+        },
+        "author": {
+          "value": "Auteur du manga",
+          "errors": {
+            "required": "Le nom de l'auteur doit être renseigné.",
+            "min-length": "Le nom de l'auteur doit faire plus de {{ minLength }} caractères.",
+            "max-length": "Le nom de l'auteur doit faire moins de {{ maxLength }} caractères."
+          }
+        },
+        "genre": {
+          "value": "Rechercher un genre"
+        }
+      }
+    },
+    "edit": {
+      "title": "Modifier un manga",
+      "path": "Éditer \"{{ title }}\"",
+      "form": {
+        "validate": "Modifier le manga"
+      }
+    },
+    "show": {
+      "title": "Affichage du manga"
+    },
+    "delete": {
+      "dialog": {
+        "title": "Suppression de {{ title }}",
+        "body": "Voulez-vous vraiment supprimer ce manga ?",
+        "actions": {
+          "cancel": "Annuler",
+          "submit": "Valider"
+        }
+      }
+    },
+    "list": {
+      "delete": {
+        "snackbar": {
+          "content": "Le manga \"{{ title }}\" a bien été supprimé."
+        }
+      }
+    }
+  },
+  "shared": {
+    "paginator": {
+      "items-per-page-label": "Lignes par page",
+      "first-page-label": "Première page",
+      "last-page-label": "Dernière page",
+      "next-page-label": "Page suivante",
+      "previous-page-label": "Page précédente",
+      "range-page-label": "{{ start }} - {{ end }} de {{ length }}"
+    },
+    "layouts": {
+      "footer": {
+        "copyright": "© {{ year }} Copyright: MangaList"
+      }
+    },
+    "navbar": {
+      "main": {
+        "home": "Accueil",
+        "mangas": "Mangas"
+      }
+    }
+  },
+  "error": {
+    "403": {
+      "action": {
+        "main": "Retour",
+        "secondary": "Accueil"
+      },
+      "browser-title": "Erreur 403"
+    },
+    "404": {
+      "title": "Ressource non trouvée",
+      "description": "Impossible de trouver la ressource ou la page demandée",
+      "action": {
+        "main": "Retour",
+        "secondary": "Accueil"
+      },
+      "browser-title": "Erreur 404"
+    },
+    "server": {
+      "not-found": {
+        "manga": {
+          "title": "[404] Le manga n'a pas été trouvé",
+          "msg": "Le manga n'existe pas"
+        }
+      },
+      "bad-request": {
+        "parameter": {
+          "bad-value": {
+            "title": "[403] Un mauvais paramètre a été choisis",
+            "msg": "Le paramètre n'existe pas"
+          }
+        }
+      }
+    }
+  },
+  "app": {
+    "http": {
+      "error": {
+        "400.msg": "400 : mauvaise requête !",
+        "403.msg": "403 : droits insuffisants.",
+        "404.msg": "404 : la ressource demandée n'existe pas.",
+        "undefined.msg": "Erreur indéterminée"
+      }
+    },
+    "server": {
+      "default": {
+        "msg": "500 : erreur serveur interne !"
+      },
+      "bad-request": {
+        "msg": "400 : mauvaise requête !",
+        "parameter": {
+          "bad-value": {
+            "title": "400 : mauvaise requête !",
+            "msg": "400 : La valeur du paramètre n'est pas le bon"
+          }
+        }
+      }
+    }
+  }
+}

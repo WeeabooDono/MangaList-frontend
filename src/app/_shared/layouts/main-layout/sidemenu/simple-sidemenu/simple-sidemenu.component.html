@@ -1,0 +1,13 @@
+<sidemenu>
+  <sidemenu-content>
+    <mat-list>
+      <ng-container *ngFor="let sideMenuItem of sideMenuItems">
+        <mat-nav-list class="simple-sidemenu-content">
+          <mat-list-item class="simple-sidemenu-item" [routerLink]="getDomainRoute(sideMenuItem.route) | async" routerLinkActive="active">
+            <span class="menu-item-text">{{ sideMenuItem.name | translate }}</span>
+          </mat-list-item>
+        </mat-nav-list>
+      </ng-container>
+    </mat-list>
+  </sidemenu-content>
+</sidemenu>

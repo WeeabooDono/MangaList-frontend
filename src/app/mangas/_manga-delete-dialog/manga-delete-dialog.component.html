@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>{{ 'mangas.delete.dialog.title' | translate:{ title: manga.title } }}</h1>
+<div mat-dialog-content>
+  <p>{{ 'mangas.delete.dialog.body' | translate }}</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">{{ 'mangas.delete.dialog.actions.cancel' | translate }}</button>
+  <button mat-button [mat-dialog-close]="manga" cdkFocusInitial>{{ 'mangas.delete.dialog.actions.submit' | translate }}</button>
+</div>

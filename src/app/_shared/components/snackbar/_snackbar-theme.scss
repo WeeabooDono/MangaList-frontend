@@ -1,0 +1,26 @@
+@mixin snackbar-theme($theme) {
+  .app-snackbar {
+    .app-snackbar-default {
+      background-color: map-get($theme, default);
+    }
+
+    .app-snackbar-error {
+      background-color: map-get($theme, error);
+    }
+
+    .app-snackbar-success {
+      background-color: map-get($theme, success);
+    }
+  }
+  //.app-snackbar-default {
+  //  background-color: map-get($theme, default);
+  //}
+  //
+  //.app-snackbar-error {
+  //  background-color: map-get($theme, error);
+  //}
+  //
+  //.app-snackbar-success {
+  //  background-color: map-get($theme, success);
+  //}
+}

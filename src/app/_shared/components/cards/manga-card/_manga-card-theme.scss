@@ -1,0 +1,16 @@
+@use '~@angular/material' as mat;
+
+@import 'genre-chip/genre-card-theme';
+
+@mixin manga-card-theme($theme) {
+  @include genre-chip-theme($theme);
+
+  $accent-map: map-get($theme, accent);
+
+  .manga-card {
+    .container {
+      background-color: mat.get-color-from-palette($accent-map, 400);
+      color: mat.get-contrast-color-from-palette($accent-map, 400);
+    }
+  }
+}

@@ -1,0 +1,51 @@
+@use '~@angular/material' as mat;
+
+@import 'domain-theme';
+@import 'palette';
+
+@include mat.core();
+
+$main-light-primary: mat.define-palette($light-primary);
+$main-light-accent: mat.define-palette($light-secondary);
+$main-light-warn: mat.define-palette(mat.$red-palette);
+
+$main-light-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $main-light-primary,
+      accent: $main-light-accent,
+      warn: $main-light-warn
+    ),
+    success: green,
+    default: map-get($main-light-accent, 500),
+    error: map-get($main-light-warn, 500),
+    pagination-button-background-color: mat.get-color-from-palette($main-light-primary, 200),
+    pagination-button-color: mat.get-contrast-color-from-palette($main-light-primary, 200),
+  )
+);
+
+$main-dark-primary: mat.define-palette($dark-primary);
+$main-dark-accent: mat.define-palette($dark-secondary);
+$main-dark-warn: mat.define-palette(mat.$red-palette);
+
+$main-dark-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $main-dark-primary,
+      accent: $main-dark-accent,
+      warn: $main-dark-warn
+    ),
+    success: green,
+    default: map-get($main-dark-accent, 500),
+    error: map-get($main-dark-warn, 500),
+    pagination-button-background-color: mat.get-color-from-palette($main-dark-primary, 200),
+    pagination-button-color: mat.get-contrast-color-from-palette($main-dark-primary, 200),
+  )
+);
+@include mat.all-component-themes($main-light-theme);
+@include domain-theme($main-light-theme);
+
+.main-dark-theme {
+  @include mat.all-component-colors($main-dark-theme);
+  @include domain-theme($main-dark-theme);
+}

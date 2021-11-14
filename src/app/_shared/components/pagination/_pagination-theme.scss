@@ -1,0 +1,19 @@
+@mixin pagination-theme($theme) {
+  .custom-paginator-page {
+    background: transparent;
+    border: none;
+    border-radius: 20%;
+    padding: 2px;
+    width: 25px;
+    height: 25px;
+
+    &.custom-paginator-page-disabled {
+      background-color: map-get($theme, pagination-button-background-color);
+      color: map-get($theme, pagination-button-color);
+    }
+
+    &.custom-paginator-page-enabled {
+      cursor: pointer;
+    }
+  }
+}

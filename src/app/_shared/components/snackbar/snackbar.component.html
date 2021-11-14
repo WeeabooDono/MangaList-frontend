@@ -1,0 +1,5 @@
+<span>{{ data.message }}</span>
+<div class="snackbar-right" *ngIf="hasActionOrCloseable">
+  <button class="snackbar-action" mat-button (click)="action()" *ngIf="hasAction">{{ data.action }}</button>
+  <button class="snackbar-close" mat-icon-button (click)="close()" *ngIf="data.closeable">close</button>
+</div>

@@ -1,0 +1,31 @@
+<p>{{ (getTitle() | async)! | translate }}</p>
+
+<div class="form-container" [formGroup]="form">
+  <mat-form-field appearance="outline">
+    <mat-label>{{ 'mangas.create.form.title.value' | translate }}</mat-label>
+    <input matInput type="text" formControlName="title" required>
+    <mat-error *ngIf="titleErrorCtrl">{{ titleErrorCtrl.key | translate:titleErrorCtrl.interpolateParams }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>{{ 'mangas.create.form.author.value' | translate }}</mat-label>
+    <input matInput type="text" formControlName="author" required>
+    <mat-error
+      *ngIf="authorErrorCtrl">{{ authorErrorCtrl.key | translate:authorErrorCtrl.interpolateParams }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>{{ 'mangas.create.form.description.value' | translate }}</mat-label>
+    <textarea matInput formControlName="description" required></textarea>
+    <mat-error
+      *ngIf="descriptionErrorCtrl">{{ descriptionErrorCtrl.key | translate:descriptionErrorCtrl.interpolateParams }}</mat-error>
+  </mat-form-field>
+
+  <genre-selector
+    [genres]="(editionMode$ | async)! ? (genres$ | async)! : []"
+    (genresChange)="updateGenres($event)"
+  ></genre-selector>
+</div>
+
+<button mat-raised-button color="accent" [disabled]="!form.valid"
+        (click)="validate()">{{ (getButtonName() | async)! | translate }}</button>

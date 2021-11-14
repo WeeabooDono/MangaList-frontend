@@ -1,0 +1,25 @@
+@use '~@angular/material' as mat;
+
+@import 'src/styles/variables';
+
+@mixin subheader-theme($theme) {
+  $primary-map: map-get($theme, primary);
+
+  .subheader {
+    background: mat.get-color-from-palette($primary-map, 700);
+    color: mat.get-contrast-color-from-palette($primary-map, 700);
+    padding: 8px $default-horizontal-padding 8px;
+  }
+
+  @include for_breakpoint(mobile) {
+    .subheader-fab {
+      right: 10px;
+      position: absolute;
+      display: block;
+    }
+  }
+
+  .subheader-sticky {
+    @include mat.elevation(3);
+  }
+}

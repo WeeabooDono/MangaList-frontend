@@ -1,0 +1,26 @@
+<div class="container">
+  <mat-form-field appearance="outline">
+    <mat-label>{{ 'mangas.create.form.genre.value' | translate}}</mat-label>
+    <input type="text" matInput [matAutocomplete]="auto" [formControl]="searchedNameCtrl">
+    <mat-spinner *ngIf="loading$ | async" matSuffix color="accent" diameter="25"></mat-spinner>
+    <mat-icon *ngIf="!(loading$ | async)" matSuffix color="accent">search</mat-icon>
+    <mat-autocomplete autoActiveFirstOption
+                      #auto="matAutocomplete"
+                      (optionSelected)="add($event.option.value)"
+                      [displayWith]="displayGenreName">
+      <mat-option *ngFor="let genre of filteredGenres$ | async" [value]="genre">
+        {{ genre.name }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <mat-chip-list>
+    <mat-chip *ngFor="let genre of genres"
+              [removable]="removable" (removed)="remove(genre)">
+      {{ genre.name }}
+      <button matChipRemove *ngIf="removable">
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </mat-chip>
+  </mat-chip-list>
+</div>

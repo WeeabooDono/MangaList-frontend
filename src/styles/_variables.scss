@@ -1,0 +1,15 @@
+$default-horizontal-padding: 20%;
+$default-padding: 16px;
+$toolbar-height: 64px;
+$mobile-toolbar-height: 56px;
+$media-queries: (
+  'mobile' : 'only screen and (max-width: 600px)',
+  'landscape' : 'screen and (orientation:landscape)',
+  'portrait' : 'screen and (orientation:portrait)'
+);
+
+@mixin for_breakpoint($breakpoint) {
+  @media #{map-get($media_queries, $breakpoint)} {
+    @content;
+  }
+}

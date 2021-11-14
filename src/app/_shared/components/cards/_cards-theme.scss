@@ -1,0 +1,5 @@
+@import 'manga-card/manga-card-theme';
+
+@mixin cards-theme($theme) {
+  @include manga-card-theme($theme);
+}

@@ -1,0 +1,26 @@
+@import 'src/styles/variables';
+@import 'navbar/navbar-theme';
+
+@mixin main-layout-theme($theme) {
+  @include navbar-theme($theme);
+
+  $primary-map: map-get($theme, primary);
+
+  .main-layout {
+    .main-layout-container {
+      .main-content {
+        margin-top: $toolbar-height;
+
+        .content {
+          padding: 16px $default-horizontal-padding 16px;
+        }
+      }
+
+      @include for_breakpoint(mobile) {
+        .main-content {
+          margin-top: $mobile-toolbar-height;
+        }
+      }
+    }
+  }
+}

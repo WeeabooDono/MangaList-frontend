@@ -1,0 +1,15 @@
+<div class="subheader" #subheader>
+  <div class="subheader-unstack" #unstack>
+    <ng-content select="subheader-unstack"></ng-content>
+  </div>
+  <div class="subheader-stack" #stack>
+    <div class="subheader-stack-content" #stackContent>
+      <ng-content select="subheader-stack"></ng-content>
+    </div>
+  </div>
+  <div class="subheader-fab" #fab>
+    <div class="subheader-fab-content" #fabContent>
+      <ng-content select="subheader-fab"></ng-content>
+    </div>
+  </div>
+</div>

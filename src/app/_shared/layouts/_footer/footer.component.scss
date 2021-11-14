@@ -1,0 +1,12 @@
+.footer {
+  .footer-container {
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+
+    .footer-copyright {
+      margin-top: auto;
+      text-align: center;
+    }
+  }
+}

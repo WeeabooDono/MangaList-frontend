@@ -1,0 +1,15 @@
+@import 'src/styles/variables';
+
+@mixin page-layout-theme($theme) {
+  .page-layout {
+    .mat-drawer-content {
+      padding-top: $toolbar-height;
+    }
+
+    @include for_breakpoint(mobile) {
+      .mat-drawer-content {
+        padding-top: $mobile-toolbar-height;
+      }
+    }
+  }
+}

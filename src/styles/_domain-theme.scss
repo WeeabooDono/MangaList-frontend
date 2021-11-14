@@ -1,0 +1,7 @@
+@import '../app/_shared/shared-theme';
+@import 'src/app/app-theme';
+
+@mixin domain-theme($custom-theme) {
+  @include shared-theme($custom-theme);
+  @include app-theme($custom-theme);
+}

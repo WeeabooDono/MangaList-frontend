@@ -1,0 +1,10 @@
+<div class="navbar-container">
+  <ng-container *ngFor="let navbarItem of navbarItems">
+    <a mat-button [routerLink]="getDomainRoute(navbarItem.route) | async" class="navbar-link" routerLinkActive="active">
+      <div class="navbar-icon-text">
+        <mat-icon *ngIf="navbarItem.icon" class="navbar-icon">{{ navbarItem.icon }}</mat-icon>
+        <span>{{ navbarItem.name | translate }}</span>
+      </div>
+    </a>
+  </ng-container>
+</div>

@@ -1,0 +1,11 @@
+@import '_footer/footer-theme';
+@import 'main-layout/main-layout-theme';
+@import 'main-layout/subheader/subheader-theme';
+@import 'src/app/_shared/layouts/_page-layout/page-layout-theme';
+
+@mixin layouts-theme($theme) {
+  @include page-layout-theme($theme);
+  @include footer-theme($theme);
+  @include main-layout-theme($theme);
+  @include subheader-theme($theme);
+}

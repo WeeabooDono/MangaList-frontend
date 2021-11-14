@@ -1,0 +1,11 @@
+@import 'cards/cards-theme';
+@import 'snackbar/snackbar-theme';
+@import 'language-item/language-item-theme';
+@import 'pagination/pagination-theme';
+
+@mixin custom-component-theme($theme) {
+  @include cards-theme($theme);
+  @include snackbar-theme($theme);
+  @include language-item-theme($theme);
+  @include pagination-theme($theme);
+}

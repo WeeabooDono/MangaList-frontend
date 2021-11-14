@@ -1,0 +1,32 @@
+<div class="page-layout mat-app-background">
+  <div class="page-layout-header">
+    <ng-content select="page-layout-header"></ng-content>
+  </div>
+  <mat-sidenav-container autosize="true">
+    <mat-sidenav #sidenav
+                 [disableClose]="isMobileView ? false : disableClose"
+                 [mode]="isMobileView ? 'over': mode"
+                 [fixedInViewport]="isMobileView ? true : onTop"
+                 [(opened)]="isMobileView ? false: isOpened"
+                 (openedStart)="onStartSwitch(true)"
+                 (closedStart)="onStartSwitch(false)"
+                 (opened)="onSwitch(true)"
+                 (closed)="onSwitch(false)"
+                 *ngIf="sidenavVisibility === 'visible' || (sidenavVisibility === 'responsive' && isMobileView)">
+      <ng-content select="page-layout-sidenav"></ng-content>
+    </mat-sidenav>
+    <mat-sidenav-content cdkScrollable>
+      <div class="page-layout-subheader">
+        <ng-content select="page-layout-subheader"></ng-content>
+      </div>
+      <div class="page-layout-wrapper" #wrapper>
+        <div class="page-layout-body" #body>
+          <ng-content select="page-layout-content"></ng-content>
+        </div>
+        <div class="page-layout-footer">
+          <ng-content select="page-layout-footer"></ng-content>
+        </div>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

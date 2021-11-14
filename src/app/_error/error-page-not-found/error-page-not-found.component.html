@@ -1,0 +1,12 @@
+<app-page-error svgIcon="404">
+  <app-page-error-title>{{ 'error.404.title' | translate }}</app-page-error-title>
+  <app-page-error-info>{{ 'error.404.description' | translate }}</app-page-error-info>
+  <app-page-error-action>
+    <button mat-stroked-button (click)="navigateBack()">
+      {{ 'error.404.action.main' | translate }}
+    </button>
+    <button mat-raised-button color="primary" (click)="navigateToHome()">
+      {{ 'error.404.action.secondary' | translate }}
+    </button>
+  </app-page-error-action>
+</app-page-error>

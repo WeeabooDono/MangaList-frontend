@@ -1,0 +1,51 @@
+<div class="sidemenu-container">
+  <ng-container *ngIf="!hasStackedHeader && !hasStackedFooter">
+    <div class="sidemenu-scrollable-zone">
+      <ng-template [cdkPortalOutlet]="_portalHeader"></ng-template>
+      <ng-template [cdkPortalOutlet]="_portalContent"></ng-template>
+      <ng-template [cdkPortalOutlet]="_portalFooter"></ng-template>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="hasStackedHeader && hasStackedFooter">
+    <ng-template [cdkPortalOutlet]="_portalHeader"></ng-template>
+    <div class="sidemenu-scrollable-zone">
+      <ng-template [cdkPortalOutlet]="_portalContent"></ng-template>
+    </div>
+    <ng-template [cdkPortalOutlet]="_portalFooter"></ng-template>
+  </ng-container>
+
+  <ng-container *ngIf="!hasStackedHeader && hasStackedFooter">
+    <div class="sidemenu-scrollable-zone">
+      <ng-template [cdkPortalOutlet]="_portalHeader"></ng-template>
+      <ng-template [cdkPortalOutlet]="_portalContent"></ng-template>
+    </div>
+    <ng-template [cdkPortalOutlet]="_portalFooter"></ng-template>
+  </ng-container>
+
+  <ng-container *ngIf="hasStackedHeader && !hasStackedFooter">
+    <ng-template [cdkPortalOutlet]="_portalHeader"></ng-template>
+    <div class="sidemenu-scrollable-zone">
+      <ng-template [cdkPortalOutlet]="_portalContent"></ng-template>
+      <ng-template [cdkPortalOutlet]="_portalFooter"></ng-template>
+    </div>
+  </ng-container>
+
+  <ng-template cdkPortal #header="cdkPortal">
+    <div class="sidemenu-header-container">
+      <ng-content select="sidemenu-header"></ng-content>
+    </div>
+  </ng-template>
+
+  <ng-template cdkPortal #content="cdkPortal">
+    <div class="sidemenu-content-container">
+      <ng-content select="sidemenu-content"></ng-content>
+    </div>
+  </ng-template>
+
+  <ng-template cdkPortal #footer="cdkPortal">
+    <div class="sidemenu-footer-container">
+      <ng-content select="sidemenu-footer"></ng-content>
+    </div>
+  </ng-template>
+</div>

@@ -1,0 +1,26 @@
+.toolbar {
+  .toolbar-container {
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+
+    .toolbar-left {
+      margin-right: 8px;
+    }
+
+    .toolbar-logo {
+      margin: 0 8px 0 8px;
+    }
+
+    .toolbar-nav {
+      flex-grow: 1;
+      height: 100%;
+    }
+
+    .toolbar-right {
+      margin: 0 8px 0 auto;
+      display: flex;
+      align-content: center;
+    }
+  }
+}

@@ -1,0 +1,47 @@
+.page-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .page-layout-header {
+    z-index: 2;
+  }
+
+  mat-sidenav-container {
+    height: 100%;
+
+    &.mat-drawer-container {
+      background-color: transparent;
+      z-index: auto;
+    }
+
+    .mat-drawer-content {
+      display: flex;
+      flex-direction: column;
+      z-index: auto;
+      box-sizing: border-box;
+
+      .page-layout-wrapper .page-layout-body .page-layout-content {
+        width: 100%;
+      }
+    }
+  }
+
+  .mat-drawer {
+    overflow-y: hidden;
+  }
+
+  .page-layout-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
+    align-items: center;
+
+    .page-layout-body {
+      display: flex;
+      flex: 1 0 auto;
+      padding: 8px 8px 0 8px;
+      max-width: 100%;
+    }
+  }
+}

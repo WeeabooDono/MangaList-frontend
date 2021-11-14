@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="left-card">
+    <img [src]="getMangaImage()" [alt]="manga?.title">
+  </div>
+  <div class="right-card">
+    <div class="card-content">
+      <div class="card-header">
+        <button mat-button
+                [routerLink]="getDomainRoute(getMangaRoute()) | async">{{ manga?.title | titlecase }}</button>
+      </div>
+
+      <div class="card-description">
+        {{ manga?.description | titlecase }}
+      </div>
+      <div class="card-actions">
+        <genre-chip *ngFor="let genre of genres$ | async" [genre]="genre"></genre-chip>
+      </div>
+    </div>
+  </div>
+</div>

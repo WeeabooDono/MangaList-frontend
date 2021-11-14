@@ -1,0 +1,48 @@
+@import '~styles/variables';
+
+.manga-card {
+  --default-radius: 1em;
+
+  .container {
+    box-sizing: border-box;
+    display: flex;
+    border-radius: var(--default-radius);
+
+    .left-card {
+      flex: 1 0 40%;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: var(--default-radius) 0 0 var(--default-radius);
+      }
+    }
+
+    .right-card {
+      padding: 8px;
+      flex: 1 0 60%;
+
+      .card-content {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
+        .card-header {
+        }
+
+        .card-description {
+          flex: 1 1 auto;
+        }
+
+        .card-actions {
+          display: flex;
+
+          .chip {
+            margin: 5px;
+          }
+        }
+      }
+    }
+  }
+}

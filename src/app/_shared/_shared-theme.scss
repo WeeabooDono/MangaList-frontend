@@ -1,0 +1,7 @@
+@import 'layouts/layouts-theme';
+@import 'components/custom-component.theme';
+
+@mixin shared-theme($theme) {
+  @include layouts-theme($theme);
+  @include custom-component-theme($theme);
+}

@@ -48,14 +48,14 @@
       }
     },
     "edit": {
-      "title": "Modifier un manga",
+      "title": "Modifier {{ manga }}",
       "path": "Éditer \"{{ title }}\"",
       "form": {
         "validate": "Modifier le manga"
       }
     },
     "show": {
-      "title": "Affichage du manga"
+      "title": "Affichage de {{ manga }}"
     },
     "delete": {
       "dialog": {

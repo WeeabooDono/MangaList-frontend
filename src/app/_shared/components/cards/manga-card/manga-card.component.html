@@ -5,8 +5,7 @@
   <div class="right-card">
     <div class="card-content">
       <div class="card-header">
-        <button mat-button
-                [routerLink]="getDomainRoute(getMangaRoute()) | async">{{ manga?.title | titlecase }}</button>
+        <a mat-button [routerLink]="getDomainRoute(getMangaRoute()) | async">{{ manga?.title | titlecase }}</a>
       </div>
 
       <div class="card-description">

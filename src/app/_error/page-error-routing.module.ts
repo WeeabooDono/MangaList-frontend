@@ -7,27 +7,27 @@ import { SimpleOutletComponent } from '@shared/outlets/simple-outlet/simple-outl
 
 const ROUTES: Routes = [
   {
-    path     : '',
+    path: '',
     component: MainLayoutOutletComponent,
-    children : [
+    children: [
       {
-        path     : '',
+        path: '',
         component: SimpleOutletComponent,
-        children : [
+        children: [
           {
-            path     : '403',
+            path: '403',
             component: ErrorPageForbiddenComponent,
-            data     : { browserTitle: { title: 'error.403.browser-title' } },
+            data: { browserTitle: { title: 'error.403.browser-title' } },
           },
           {
-            path     : '404',
+            path: '404',
             component: ErrorPageNotFoundComponent,
-            data     : { browserTitle: { title: 'error.404.browser-title' } },
+            data: { browserTitle: { title: 'error.404.browser-title' } },
           },
           {
-            path      : '',
+            path: '',
             redirectTo: '404',
-            pathMatch : 'full',
+            pathMatch: 'full',
           },
         ],
       },
@@ -40,4 +40,5 @@ const ROUTES: Routes = [
   imports: [RouterModule.forChild(ROUTES)],
   exports: [RouterModule],
 })
-export class PageErrorRoutingModule { }
+export class PageErrorRoutingModule {
+}

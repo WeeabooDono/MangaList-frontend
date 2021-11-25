@@ -9,15 +9,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from '@shared/angular-material.module';
 import { IconService } from '@core/service/utils/icon.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ErrorNotifierService } from '@core/service/error/error-notifier.service';
 import { ErrorInterceptor } from '@core/service/error/error.interceptor';
 import { MangasModule } from 'app/mangas/mangas.module';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { MatPaginatorIntlTranslate } from '@shared/components/pagination/MatPaginatorIntl.translate';
 import { TranslateService } from '@ngx-translate/core';
 import { BrowserTitleService } from '@core/service/utils/browser-title.service';
+import { DomainService } from '@core/service/domain/domain.service';
 
 const initBrowserTitleService = (browserTitleService: BrowserTitleService) => () => browserTitleService.init();
+const initDomainService = (domainService: DomainService) => () => domainService.init();
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,10 +33,10 @@ const initBrowserTitleService = (browserTitleService: BrowserTitleService) => ()
     AngularMaterialModule,
   ],
   providers: [
-    ErrorNotifierService,
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: MatPaginatorIntl, useClass: MatPaginatorIntlTranslate, deps: [TranslateService] },
     { provide: APP_INITIALIZER, useFactory: initBrowserTitleService, deps: [BrowserTitleService], multi: true },
+    { provide: APP_INITIALIZER, useFactory: initDomainService, deps: [DomainService], multi: true },
   ],
 })
 export class AppModule {

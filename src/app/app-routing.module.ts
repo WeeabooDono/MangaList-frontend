@@ -30,6 +30,15 @@ const domainRoute: Route = {
       ],
     },
     mangasRoute,
+    {
+      path: 'error',
+      loadChildren: () => import('@error/page-error.module').then(m => m.PageErrorModule),
+    },
+    {
+      path: '**',
+      redirectTo: 'error',
+      pathMatch: 'full',
+    },
   ],
 };
 
@@ -40,16 +49,7 @@ export const ROUTES: Routes = [
     canActivate: [DomainRedirectGuard],
     pathMatch: 'full',
   },
-  {
-    path: 'error',
-    loadChildren: () => import('@error/page-error.module').then(m => m.PageErrorModule),
-  },
   domainRoute,
-  {
-    path: '**',
-    redirectTo: 'error',
-    pathMatch: 'full',
-  },
 ];
 
 @NgModule({

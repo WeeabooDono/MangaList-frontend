@@ -1,4 +1,4 @@
-<p>{{ (getTitle() | async)! | translate }}</p>
+<p>{{ (getTitle() | async)! | translate: {manga: (manga$ | async)?.title} }}</p>
 
 <div class="form-container" [formGroup]="form">
   <mat-form-field appearance="outline">

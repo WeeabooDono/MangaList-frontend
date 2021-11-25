@@ -6,11 +6,12 @@ import { ErrorPageForbiddenComponent } from '@error/error-page-forbidden/error-p
 import {
   AppPageErrorActionDirective,
   AppPageErrorInfoDirective,
-  AppPageErrorTitleDirective, PageErrorComponent,
+  AppPageErrorTitleDirective,
+  PageErrorComponent,
 } from '@error/page-error.component';
 
 @NgModule({
-  imports     : [SharedModule, PageErrorRoutingModule],
+  imports: [SharedModule, PageErrorRoutingModule],
   declarations: [
     AppPageErrorTitleDirective,
     AppPageErrorActionDirective,
@@ -29,4 +30,5 @@ import {
     PageErrorComponent,
   ],
 })
-export class PageErrorModule { }
+export class PageErrorModule {
+}

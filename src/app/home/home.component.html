@@ -1,10 +1,5 @@
 <div class="content">
-  <mat-form-field class="search" appearance="outline" color="accent">
-    <mat-label>{{ 'home.form.search.label' | translate }}</mat-label>
-    <input matInput type="text" [formControl]="searchedTitleCtrl">
-    <mat-spinner *ngIf="loading$ | async" matSuffix color="accent" diameter="25"></mat-spinner>
-    <mat-icon *ngIf="!(loading$ | async)" matSuffix color="accent">search</mat-icon>
-  </mat-form-field>
+  <search (searchValue)="search($event)" [label]="'home.form.search.label'" [loading]="(loading$ | async)!"></search>
 
   <div class="manga-list">
     <ng-container *ngFor="let manga of (mangas$ | async)">

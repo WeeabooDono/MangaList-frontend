@@ -1,4 +1,4 @@
-import { ApplicationRef, NgModule } from '@angular/core';
+import { APP_INITIALIZER, ApplicationRef, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -15,6 +15,9 @@ import { MangasModule } from 'app/mangas/mangas.module';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { MatPaginatorIntlTranslate } from '@shared/components/pagination/MatPaginatorIntl.translate';
 import { TranslateService } from '@ngx-translate/core';
+import { BrowserTitleService } from '@core/service/utils/browser-title.service';
+
+const initBrowserTitleService = (browserTitleService: BrowserTitleService) => () => browserTitleService.init();
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,6 +35,7 @@ import { TranslateService } from '@ngx-translate/core';
     ErrorNotifierService,
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: MatPaginatorIntl, useClass: MatPaginatorIntlTranslate, deps: [TranslateService] },
+    { provide: APP_INITIALIZER, useFactory: initBrowserTitleService, deps: [BrowserTitleService], multi: true },
   ],
 })
 export class AppModule {

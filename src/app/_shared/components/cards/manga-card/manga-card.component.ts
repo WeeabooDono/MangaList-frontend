@@ -48,6 +48,6 @@ export class MangaCardComponent extends NavigationDomainRouter implements AfterV
   }
 
   public getMangaRoute(): string[] {
-    return ['/mangas', String(this.manga.id), 'show'];
+    return ['mangas', String(this.manga.id), 'show'];
   }
 }

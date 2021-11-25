@@ -24,7 +24,7 @@ export abstract class Sidemenu extends NavigationDomainRouter {
 
     breakpointObserver
       .observe([Breakpoints.XSmall, Breakpoints.Small])
-      .pipe(takeUntil(this.destroyed))
+      .pipe(takeUntil(this.destroyed$))
       .subscribe((result) => {
         this.isMobile = result.matches;
         this.cd.markForCheck();

@@ -9,7 +9,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { debounceTime, startWith, takeUntil } from 'rxjs/operators';
+import { debounceTime, takeUntil } from 'rxjs/operators';
 import { Destroyed } from '@core/hooks/destroyed';
 
 @Component({
@@ -42,6 +42,6 @@ export class SearchComponent extends Destroyed implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.searchCtrl.valueChanges.pipe(debounceTime(this.debounceTime), takeUntil(this.destroyed), startWith('')).subscribe(this.searchValue);
+    this.searchCtrl.valueChanges.pipe(debounceTime(this.debounceTime), takeUntil(this.destroyed$)).subscribe(this.searchValue);
   }
 }

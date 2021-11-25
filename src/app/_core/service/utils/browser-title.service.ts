@@ -7,12 +7,17 @@ import { filter, map, switchMap, takeUntil } from 'rxjs/operators';
 import { combineLatest, Subject } from 'rxjs';
 import { DomainService } from '@core/service/domain/domain.service';
 
+export interface CustomTitle {
+  key: string;
+  interpolateParams?: Object,
+}
+
 @Injectable({ providedIn: 'root' })
 export class BrowserTitleService extends Destroyed implements Destroyed {
 
   private readonly appName: string;
 
-  private customPageTitle$ = new Subject<string | null>();
+  private customPageTitle$ = new Subject<CustomTitle | null>();
 
   constructor(private domainService: DomainService,
               private title: Title,
@@ -50,25 +55,28 @@ export class BrowserTitleService extends Destroyed implements Destroyed {
       }));
 
     const after$ = browserTitle$.pipe(map(browserTitle => browserTitle?.after));
-    const routeTitle$ = browserTitle$.pipe(map(browserTitle => browserTitle?.title), switchMap(title => this.translate.get(title)));
+    const routeTitle$ = browserTitle$.pipe(map(browserTitle => browserTitle?.title), switchMap(title => this.translate.stream(title)));
 
     // On combine le tout pour afficher le titre comme voulu. Il sera donc mis à jour sur un évènement de fin
-    // de navifation, sur un changement de domain ou sur une modification du customPageTitle.
+    // de navigation, sur un changement de domaine ou sur une modification du customPageTitle.
     combineLatest([this.customPageTitle$, routeTitle$, after$, this.domainService.valueChange$])
-      .pipe(takeUntil(this.destroyed))
+      .pipe(takeUntil(this.destroyed$))
       .subscribe(([customPageTitle, routeTitle, after, domain]) => {
-        this.updateTitle(customPageTitle ? customPageTitle : routeTitle, after, domain);
+        this.updateTitle(customPageTitle ? customPageTitle : { key: routeTitle }, after, domain);
       });
 
     // On commence par clear le customPageTitle
     this.clearCustomTitle();
   }
 
-  private updateTitle(pageTitle: string, after?: boolean, domain?: string): void {
+  private updateTitle(pageTitle: CustomTitle, after?: boolean, domain?: string): void {
     if (pageTitle) {
-      const beforeText = after ? this.appName : pageTitle;
-      const afterText = after ? pageTitle : this.appName;
-      this.title.setTitle(`${ beforeText } - ${ afterText }`);
+      const translate$ = pageTitle.interpolateParams ? this.translate.stream(pageTitle.key, pageTitle.interpolateParams) : this.translate.stream(pageTitle.key);
+      translate$.subscribe(title => {
+        const beforeText = after ? this.appName : title;
+        const afterText = after ? title : this.appName;
+        this.title.setTitle(`${ beforeText } - ${ afterText }`);
+      });
     } else {
       this.title.setTitle(this.appName);
     }
@@ -78,7 +86,7 @@ export class BrowserTitleService extends Destroyed implements Destroyed {
     this.setCustomTitle(null);
   }
 
-  public setCustomTitle(pageTitle: string | null): void {
+  public setCustomTitle(pageTitle: CustomTitle | null): void {
     this.customPageTitle$.next(pageTitle);
   }
 

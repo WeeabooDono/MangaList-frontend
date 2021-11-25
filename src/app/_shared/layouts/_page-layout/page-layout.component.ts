@@ -125,7 +125,7 @@ export class PageLayoutComponent extends Destroyed implements OnInit, OnChanges,
   ngOnInit() {
     this.breakpointObserver
       .observe([Breakpoints.XSmall, Breakpoints.Small])
-      .pipe(takeUntil(this.destroyed))
+      .pipe(takeUntil(this.destroyed$))
       .subscribe((result) => {
         this.isMobileView = result.matches;
         this.mobileViewSubject.next(result.matches);
@@ -174,7 +174,7 @@ export class PageLayoutComponent extends Destroyed implements OnInit, OnChanges,
   }
 
   private onChangePage() {
-    this.router.events.pipe(takeUntil(this.destroyed)).subscribe((e) => {
+    this.router.events.pipe(takeUntil(this.destroyed$)).subscribe((e) => {
       if (e instanceof NavigationEnd && this.startScrollOnTop) {
         this.scrollable.scrollTo({ top: 0 });
       }

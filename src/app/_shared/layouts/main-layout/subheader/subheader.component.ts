@@ -98,7 +98,7 @@ export class SubheaderComponent extends Destroyed implements OnChanges, OnInit, 
 
     this.breakpointObserver
       .observe([Breakpoints.XSmall, Breakpoints.Small])
-      .pipe(takeUntil(this.destroyed))
+      .pipe(takeUntil(this.destroyed$))
       .subscribe((result) => {
         this.isMobileView = result.matches;
       });
@@ -111,12 +111,12 @@ export class SubheaderComponent extends Destroyed implements OnChanges, OnInit, 
     this.displayFabSubheader();
     this.pageWidth = this.stack.nativeElement.clientWidth;
     if (this.pageLayout) {
-      this.pageLayout.startOpened.pipe(takeUntil(this.destroyed)).subscribe((result) => {
+      this.pageLayout.startOpened.pipe(takeUntil(this.destroyed$)).subscribe((result) => {
         this.isOpened = result;
         this.openSideNav(result);
       });
 
-      this.pageLayout.navMode$.pipe(takeUntil(this.destroyed)).subscribe((mode) => {
+      this.pageLayout.navMode$.pipe(takeUntil(this.destroyed$)).subscribe((mode) => {
         this.navMode = mode as SidenavModeType;
         this.changeMode(mode);
       });

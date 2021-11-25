@@ -61,7 +61,7 @@ export class MangasComponent extends Destroyed implements OnInit {
     this.mangas$ = this.pagedMangas$.pipe(map(pagedMangaDTO => pagedMangaDTO.items));
   }
 
-  public pageActions(pageEvent: PageEvent) {
+  public pageActions(pageEvent: PageEvent): void {
     this.pager.page = pageEvent.pageIndex;
     this.pager.pageSize = pageEvent.pageSize;
     this.pageChanged$.next();
@@ -84,7 +84,7 @@ export class MangasComponent extends Destroyed implements OnInit {
     });
   }
 
-  public search(title: string) {
+  public search(title: string): void {
     this.title$.next(title);
   }
 }

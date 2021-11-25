@@ -4,8 +4,7 @@ import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { defaultPage, defaultPageSize, Manga, pageSizeOptions } from '@shared/models/manga.model';
 import { PagedListDTO, PagerDTO } from '@shared/models/tools/pagination.model';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { debounceTime, map, pluck, startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
-import { FormControl } from '@angular/forms';
+import { map, pluck, startWith, switchMap, tap } from 'rxjs/operators';
 import { cache } from '@shared/utils/operators';
 import { Destroyed } from '@core/hooks/destroyed';
 
@@ -28,14 +27,13 @@ export class HomeComponent extends Destroyed implements OnInit {
     pageSize: defaultPageSize,
   };
 
-  public searchedTitleCtrl: FormControl = new FormControl(null);
-
   public pagedMangas$ = new Observable<PagedListDTO<Manga>>();
   public mangas$ = new Observable<Manga[]>();
-  public loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
-  public pageChanged$: Subject<void> = new Subject<void>();
 
-  private searchTitle$: Observable<string> = new Observable<string>();
+  public loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  public title$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+
+  private pageChanged$: Subject<void> = new Subject<void>();
 
   constructor(private mangaService: MangaService) {
     super();
@@ -43,24 +41,26 @@ export class HomeComponent extends Destroyed implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.searchTitle$ = this.searchedTitleCtrl.valueChanges.pipe(debounceTime(500), takeUntil(this.destroyed));
-
-    this.pagedMangas$ = combineLatest([this.searchTitle$.pipe(startWith('')), this.pageChanged$.asObservable()])
-      .pipe(
-        pluck(0),
-        startWith(''),
-        tap(() => this.loading$.next(true)),
-        switchMap(title => this.mangaService.searchMangaByTitle({ pager: this.pager, criteria: { title } })),
-        tap(() => this.loading$.next(false)),
-        cache(),
-      );
+    this.pagedMangas$ = combineLatest([
+      this.title$,
+      this.pageChanged$.asObservable().pipe(startWith(undefined as void)),
+    ]).pipe(
+      pluck(0),
+      tap(() => this.loading$.next(true)),
+      switchMap((title) => this.mangaService.searchMangaByTitle({ pager: this.pager, criteria: { title } })),
+      tap(() => this.loading$.next(false)),
+      cache());
 
     this.mangas$ = this.pagedMangas$.pipe(map(pagedMangaDTO => pagedMangaDTO.items));
   }
 
-  public pageActions(pageEvent: PageEvent) {
+  public pageActions(pageEvent: PageEvent): void {
     this.pager.page = pageEvent.pageIndex;
     this.pager.pageSize = pageEvent.pageSize;
     this.pageChanged$.next();
+  }
+
+  public search(title: string): void {
+    this.title$.next(title);
   }
 }

@@ -1,4 +1,4 @@
-<p>{{ 'mangas.show.title' | translate }}</p>
+<p>{{ 'mangas.show.title' | translate:{ manga: mangaTitle$ | async } }}</p>
 {{ (manga$ | async)?.title }}
 
 <ul>

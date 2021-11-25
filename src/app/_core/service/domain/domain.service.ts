@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Destroyed } from '@core/hooks/destroyed';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { NavigationEnd, Router } from '@angular/router';
-import { filter, map, takeUntil } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { NavigationEnd, ResolveEnd, Router } from '@angular/router';
+import { filter, map, pluck, takeUntil } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 
 export const domains = ['fr', 'us'];
@@ -22,64 +22,66 @@ export class DomainService extends Destroyed {
   constructor(private router: Router,
               private translate: TranslateService) {
     super();
-    this.initListeners();
   }
 
   private static getDefaultDomain(): string {
-    const storedDomain = localStorage.getItem(DomainService.KEY)
-    return storedDomain? storedDomain : DomainService.DEFAULT_DOMAIN;
+    const storedDomain = localStorage.getItem(DomainService.KEY);
+    return storedDomain ? storedDomain : DomainService.DEFAULT_DOMAIN;
   }
 
   private switchDomain(domain: string) {
-    if(this._valueChange$.value !== domain) {
+    if (this._valueChange$.value !== domain) {
       this._valueChange$.next(domain);
     }
   }
 
-  private initListeners(): void {
+  public init(): void {
     this.initLocalStorageDomainListeners();
     this.initNavigationEndEventListener();
     this.initSwitchLangListener();
   }
 
   private initLocalStorageDomainListeners(): void {
-    this.valueChange$.pipe(takeUntil(this.destroyed))
+    this.valueChange$.pipe(takeUntil(this.destroyed$))
       .subscribe(domain => {
-        if(domain) {
+        if (domain) {
           localStorage.setItem(DomainService.KEY, domain);
         } else {
           // Should never happen
           localStorage.removeItem(DomainService.KEY);
         }
-      })
+      });
   }
 
   private initNavigationEndEventListener(): void {
-    const navigationEndEvent$ = this.router.events.pipe(takeUntil(this.destroyed), filter((event) => event instanceof NavigationEnd));
+    const navigationEndEvent$ = this.router.events.pipe(takeUntil(this.destroyed$), filter((event) => event instanceof NavigationEnd));
     navigationEndEvent$.pipe(map(() => this.getDomainIfExists()))
       .subscribe(domain => {
-        if(domain) {
+        if (domain) {
           this.switchDomain(domain);
         }
-      })
+      });
   }
 
   private initSwitchLangListener(): void {
-    this.valueChange$.pipe(takeUntil(this.destroyed))
+    // On check les "ResolveEnd" pour la traduction
+    const resolveEndEvent$ = this.router.events.pipe(takeUntil(this.destroyed$), filter((event) => event instanceof ResolveEnd));
+    combineLatest([this.valueChange$, resolveEndEvent$])
+      .pipe(takeUntil(this.destroyed$), pluck(0))
       .subscribe(domain => {
-        if(domain) {
+        if (domain) {
           this.translate.addLangs([domain]);
           this.translate.setDefaultLang(domain);
           this.translate.use(domain);
         }
-      })
+      });
   }
 
   private getDomainIfExists(): string | undefined {
     let route = this.router.routerState.root;
     while (route.firstChild) {
       const domain = route.snapshot.paramMap.get(DomainService.KEY);
-      if(domain) {
+      if (domain) {
         return domain;
       }
       route = route.firstChild;

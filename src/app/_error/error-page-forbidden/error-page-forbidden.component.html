@@ -1,7 +1,10 @@
-<button mat-stroked-button (click)="navigateBack()">
-  {{ 'error.403.action.main' | translate }}
-</button>
-<button mat-raised-button color="primary" (click)="navigateToHome()">
-  {{ 'error.403.action.secondary' | translate }}
-</button>
-403 forbidden
+<app-page-error svgIcon="403">
+  <app-page-error-action>
+    <button mat-stroked-button (click)="navigateBack()">
+      {{ 'error.403.action.main' | translate }}
+    </button>
+    <button mat-raised-button color="primary" (click)="navigateToHome()">
+      {{ 'error.403.action.secondary' | translate }}
+    </button>
+  </app-page-error-action>
+</app-page-error>

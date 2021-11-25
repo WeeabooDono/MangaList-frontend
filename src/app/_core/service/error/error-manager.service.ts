@@ -26,7 +26,7 @@ export class ErrorManagerService extends Destroyed {
   ) {
     super();
 
-    this.errorNotifierService.error$.pipe(takeUntil(this.destroyed)).subscribe((error) => {
+    this.errorNotifierService.error$.pipe(takeUntil(this.destroyed$)).subscribe((error) => {
       this.logError(error);
       this.manageSnackbar(error);
       this.managePageError(error);

@@ -4,14 +4,14 @@ import { Subject } from 'rxjs';
 @Directive()
 export abstract class Destroyed implements OnDestroy {
 
-  protected destroyed: Subject<void>;
+  protected destroyed$: Subject<void>;
 
   protected constructor() {
-    this.destroyed = new Subject<void>();
+    this.destroyed$ = new Subject<void>();
   }
 
   ngOnDestroy(): void {
-    this.destroyed.next();
-    this.destroyed.complete();
+    this.destroyed$.next();
+    this.destroyed$.complete();
   }
 }

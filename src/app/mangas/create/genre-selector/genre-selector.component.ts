@@ -44,7 +44,7 @@ export class GenreSelectorComponent extends Destroyed {
     super();
     this.isGenreSelector = true;
 
-    this.searchName$ = this.searchedNameCtrl.valueChanges.pipe(debounceTime(500), takeUntil(this.destroyed));
+    this.searchName$ = this.searchedNameCtrl.valueChanges.pipe(debounceTime(500), takeUntil(this.destroyed$));
     this.filteredGenres$ = this.searchName$.pipe(
       startWith(''),
       tap(() => this.loading$.next(true)),

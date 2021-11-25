@@ -3,7 +3,7 @@ import { MangaService } from '@core/service/manga.service';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ErrorTranslateModel } from '@shared/models/tools/form.model';
 import { combineLatest, Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, takeUntil } from 'rxjs/operators';
 import { SnackbarService } from '@shared/components/snackbar/snackbar.service';
 import { SnackbarType } from '@shared/components/snackbar/snackbar.model';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,6 +12,7 @@ import { GenreService } from '@core/service/genre.service';
 import { Genre } from '@shared/models/genre.model';
 import { DomainService } from '@core/service/domain/domain.service';
 import { NavigationDomainRouter } from '@shared/navigation/navigation-domain-router';
+import { BrowserTitleService } from '@core/service/utils/browser-title.service';
 
 @Component({
   selector: 'app-mangas-create',
@@ -73,13 +74,14 @@ export class MangasCreateComponent extends NavigationDomainRouter {
     }
   }
 
-  constructor(private mangaService: MangaService,
+  constructor(protected domainService: DomainService,
+              protected router: Router,
+              protected route: ActivatedRoute,
+              private mangaService: MangaService,
               private genreService: GenreService,
-              protected domainService: DomainService,
               private fb: FormBuilder,
               private snackbarService: SnackbarService,
-              protected router: Router,
-              protected route: ActivatedRoute) {
+              private browserTitleService: BrowserTitleService) {
     super(router, route, domainService);
     this.isMangasCreate = true;
     this.manga$ = this.route.data.pipe(map(data => data.manga));
@@ -90,6 +92,7 @@ export class MangasCreateComponent extends NavigationDomainRouter {
       }
       return [];
     }));
+    this.manageBrowserTitle();
     this.initForm();
   }
 
@@ -136,6 +139,22 @@ export class MangasCreateComponent extends NavigationDomainRouter {
       }));
 
     this.form.statusChanges.subscribe();
+  }
+
+  private manageBrowserTitle(): void {
+    combineLatest([this.manga$, this.editionMode$])
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(([manga, editionMode]) => {
+        if (editionMode) {
+          this.browserTitleService.setCustomTitle({
+            key: 'mangas.edit.title',
+            interpolateParams: { manga: manga.title },
+          });
+        } else {
+          this.browserTitleService.setCustomTitle({ key: 'mangas.create.title' });
+        }
+      });
+    this.destroyed$.subscribe(() => this.browserTitleService.setCustomTitle(null));
   }
 
   public getTitle(): Observable<string> {
